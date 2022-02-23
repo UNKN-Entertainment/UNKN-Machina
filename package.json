@@ -1,6 +1,32 @@
 {
-  "dependencies": {
-    "discord.js": "^13.6.0",
-    "octokit": "^1.7.1"
+	"name": "machina",
+	"version": "1.0.0",
+	"engines": {
+		"node": ">=16.0.0"
+	},
+	"engineStrict": true,
+	"description": "A custom Discord mod-bot created to manage the UNKN Entertainment Discord server.",
+	"main": "dist/src/machina.js",
+	"scripts": {
+		"start": "node dist/src/machina.js",
+		"build": "tsc -p .",
+		"clean": "rm -rf dist",
+		"test": "eslint src --ext .ts",
+		"lint": "eslint src --ext .ts --fix",
+		"dev": "tsc-watch --onSuccess \"node dist/src/machina.js\""
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/UNKN-Entertainment/UNKN-Machina.git"
+	},
+	"author": "Ren Ross (cryptid)",
+	"license": "",
+	"bugs": {
+		"url": "https://github.com/UNKN-Entertainment/UNKN-Machina/issues"
+	},
+	"homepage": "https://github.com/UNKN-Entertainment/UNKN-Machina",
+	"dependencies": {
+    	"discord.js": "^13.6.0",
+    	"octokit": "^1.7.1"
   }
 }
