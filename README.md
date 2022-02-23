@@ -1,3 +1,5 @@
 # UNKN-Machina
-![GitHub package.json version](https://img.shields.io/github/package-json/v/UNKN-Entertainment/UNKN-Machina?color=000855) ![We use Typescript](https://img.shields.io/badge/written_in-typescript-000855?logo=typescript&logoColor=ddd) ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/UNKN-Entertainment/UNKN-Machina/Lint?color=000855&logo=github) ![GitHub repo size](https://img.shields.io/github/repo-size/UNKN-Entertainment/UNKN-Machina?color=000855&logo=github) ![Lines of code](https://img.shields.io/tokei/lines/github/UNKN-Entertainment/UNKN-Machina?color=000855&logo=github)
+![We use Typescript](https://img.shields.io/badge/written_in-typescript-000855?logo=typescript&logoColor=ddd)
 
+Created and maintained by: 
+<a href="https://github.com/renross">Ren Ross</a>
