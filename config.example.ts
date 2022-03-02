@@ -6,8 +6,11 @@ export const BOT = {
 
 export const GUILD = '';	// Guild ID
 
-
-export const ROLES = {};		// Role IDS for each role
+export const ROLES = {	// Role IDS for each role
+	BOT_MASTER: '',
+	OPS: '', 
+	STAFF: '',
+};		
 
 export const CHANNELS = { // Channel IDs
 	ANNOUNCEMENTS: '',
