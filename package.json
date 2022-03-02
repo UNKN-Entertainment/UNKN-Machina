@@ -26,8 +26,16 @@
 	},
 	"homepage": "https://github.com/UNKN-Entertainment/UNKN-Machina",
 	"dependencies": {
+		"console-stamp": "^3.0.4",
 		"discord.js": "^13.6.0",
-		"octokit": "^1.7.1"
+		"module-alias": "^2.2.2",
+		"pretty-ms": "^7.0.1",
+		"tsc-watch": "^4.6.0"
+	},
+	"_moduleAliases": {
+		"@root": "dist",
+		"@lib": "dist/src/lib",
+		"@pieces": "dist/src/pieces"
 	},
 	"devDependencies": {
 		"@typescript-eslint/eslint-plugin": "^5.13.0",

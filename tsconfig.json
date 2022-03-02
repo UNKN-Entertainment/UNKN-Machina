@@ -8,7 +8,7 @@
         "paths": {
 			"@root/*": ["*"],
 			"@lib/*": ["src/lib/*"],
-			"@pieces/*": ["src/pieces/*"]
+			"@pieces/*": ["src/components/*"]
         },
         "resolveJsonModule": true,
         "rootDir": "./",
