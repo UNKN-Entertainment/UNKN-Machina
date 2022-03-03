@@ -7,8 +7,8 @@ export const STAFF_PERMS: ApplicationCommandPermissionData = {
 	type: 'ROLE'
 };
 
-export const OPS_PERMS: ApplicationCommandPermissionData = {
-	id: ROLES.OPS,
+export const OPPS_PERMS: ApplicationCommandPermissionData = {
+	id: ROLES.OPPS,
 	permission: true,
 	type: 'ROLE'
 };
