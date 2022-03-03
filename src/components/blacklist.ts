@@ -1,9 +1,9 @@
-import { BLACKLIST } from '@root/config';
-import { Client, Message } from 'discord.js';
-
 // source 1:  https://github.com/powercord-org/powercord-backend/blob/3a5d85e21a8120a9a162751284bd143b171c8c2f/packages/boat/src/modules/mod/automod.ts
 // source 2:  https://github.com/stevebot-project/steve/blob/master/src/monitors/wordBlacklist.ts
 // source 3:  https://github.com/ud-cis-discord/SageV2/blob/main/src/pieces/blacklist.ts
+
+import { BLACKLIST } from '@root/config';
+import { Client, Message } from 'discord.js';
 
 const CLEANER = /[\u200B-\u200F\u2060-\u2063\uFEFF\u00AD\u180E]|[\u0300-\u036f]|[\u202A-\u202E]|[/\\]/g;
 const NORMALIZE: [RegExp, string][] = [
@@ -123,6 +123,5 @@ async function filterMessages(msg: Message): Promise<Message | void> {
 		}
 	}
 }
-
 
 export default register;
