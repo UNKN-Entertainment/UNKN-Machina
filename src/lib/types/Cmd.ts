@@ -6,14 +6,14 @@ export abstract class Command {
 	// members
 	name: string;
 	category: string;
-	enabled: boolean;
-	aliases?: Array<string>;
 	description: string;
 	usage?: string;
-	extendedHelp?: string;
-	runInDM?: boolean = true;
-	runInGuild?: boolean = true;
 	options?: ApplicationCommandOptionData[];
+	permissions?: ApplicationCommandPermissionData[] = [{
+		id: ROLES.EVERYONE,
+		type: 'ROLE',
+		permission: true
+	}];
 
 	// functions
 	abstract run(interaction: CommandInteraction): Promise<unknown>;
