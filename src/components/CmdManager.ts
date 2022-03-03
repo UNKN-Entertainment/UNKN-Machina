@@ -1,7 +1,7 @@
 // source: https://github.com/ud-cis-discord/SageV2/blob/222918977bb3d73476492bdbf16b8edacbb6d2c8/src/pieces/commandManager.ts
 
 import { Collection, Client, CommandInteraction, ApplicationCommand, ApplicationCommandPermissionData } from 'discord.js';
-import { isCmdEqual, isPermissionEqual, readdirRecursive } from '@lib/utils';
+import { isCmdEqual, isPermEqual, readdirRecursive } from '@lib/utils';
 import { Command } from '@lib/types/Cmd';
 import { GUILD } from '@root/config';
 import { CommandError } from '../lib/types/Errors';
@@ -86,7 +86,7 @@ async function loadCommands(bot: Client) {
 		if (botCmd
 			&& (botCmd.permissions.length !== curPerms.length
 				|| !botCmd.permissions.every(perm =>
-					curPerms.find(curPerm => isPermissionEqual(curPerm, perm))))) {
+					curPerms.find(curPerm => isPermEqual(curPerm, perm))))) {
 			console.log(`Updating permissions for ${botCmd.name}`);
 			permsUpdated++;
 			return commands.permissions.set({
