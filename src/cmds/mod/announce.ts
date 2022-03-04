@@ -1,12 +1,12 @@
 import { TextChannel, ApplicationCommandPermissionData, CommandInteraction, ApplicationCommandOptionData } from 'discord.js';
 import { BOTMASTER_PERMS } from '@lib/perms';
 import { CHANNELS } from '@root/config';
-import { Command } from '@lib/types/Cmd';
+import { Command } from '@root/src/lib/types/Command';
 
 export default class extends Command {
 
 	description = 'Sends an announcement from Sage to a specified channel or announcements if no channel is given.';
-	permissions: ApplicationCommandPermissionData = BOTMASTER_PERMS;
+	permissions: ApplicationCommandPermissionData[] = [BOTMASTER_PERMS];
 
 	options: ApplicationCommandOptionData[] = [{
 		name: 'channel',

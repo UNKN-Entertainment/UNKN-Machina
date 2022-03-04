@@ -1,4 +1,4 @@
-import { Command } from '@lib/types/Cmd';
+import { Command } from '@root/src/lib/types/Command';
 import { Collection } from 'discord.js';
 
 declare module 'discord.js' {

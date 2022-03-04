@@ -1,7 +1,7 @@
 import { ApplicationCommandOptionData, CommandInteraction, EmbedField, MessageEmbed, Util, GuildMember } from 'discord.js';
 import { getCmd } from '@lib/utils';
 import { BOT, PREFIX } from '@root/config';
-import { Command } from '@lib/types/Cmd';
+import { Command } from '@root/src/lib/types/Command';
 
 export default class extends Command {
 

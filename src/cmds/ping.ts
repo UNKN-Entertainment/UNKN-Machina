@@ -1,5 +1,5 @@
 import { CommandInteraction } from 'discord.js';
-import { Command } from '@lib/types/Cmd';
+import { Command } from '@root/src/lib/types/Command';
 import prettyMilliseconds from 'pretty-ms';
 
 export default class extends Command {
