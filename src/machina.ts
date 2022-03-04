@@ -1,6 +1,7 @@
 import 'module-alias/register';
 import { Client, Intents, PartialTypes } from 'discord.js';
-import { BOT } from '@root/config';
+import { version } from '@root/package.json';
+import { BOT, PREFIX } from '@root/config';
 import consoleStamp from 'console-stamp';
 
 const BOT_INTENTS = [
@@ -38,6 +39,11 @@ async function main() {
 		console.log(`${bot.ws.ping}ms WS ping`);
 		console.log(`Logged into ${bot.guilds.cache.size} guilds`);
 		console.log(`Serving ${bot.users.cache.size} users`);
+		
+		const activity = `${PREFIX}help`;
+		const type = 'PLAYING';
+		bot.user.setActivity(`${activity} (v${version})`, { type });
+		setTimeout(() => bot.user.setActivity(activity, { type }), 30e3);
 	});
 }
 
