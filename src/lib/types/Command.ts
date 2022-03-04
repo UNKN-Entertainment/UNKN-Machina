@@ -9,17 +9,16 @@ export abstract class Command {
 	extendedHelp?: string;
 	options?: ApplicationCommandOptionData[];
 	permissions?: ApplicationCommandPermissionData[] = [{
-		id: ROLES.EVERYONE,
+		id: ROLES.MEMBER,
 		type: 'ROLE',
 		permission: true
 	}];
 
 	abstract run(interaction: CommandInteraction): Promise<unknown>;
-
 }
 
 export interface CompCommand {
 	name: string,
 	description: string,
-	options: ApplicationCommandOptionData[]
+	options?: ApplicationCommandOptionData[]
 }

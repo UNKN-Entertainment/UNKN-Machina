@@ -1,8 +1,8 @@
 // source: https://github.com/ud-cis-discord/SageV2/blob/222918977bb3d73476492bdbf16b8edacbb6d2c8/src/pieces/commandManager.ts
 
 import { Collection, Client, CommandInteraction, ApplicationCommand, ApplicationCommandPermissionData } from 'discord.js';
-import { isCmdEqual, isPermEqual, readdirRecursive } from '@lib/utils';
-import { Command } from '@lib/types/Cmd';
+import { updateCmd, isPermEqual, readdirRecursive } from '@lib/utils';
+import { Command, CompCommand } from '@root/src/lib/types/Command';
 import { GUILD } from '@root/config';
 import { CommandError } from '../lib/types/Errors';
 
@@ -62,7 +62,7 @@ async function loadCommands(bot: Client) {
 			awaitedCmds.push(commands.create(cmdData));
 			numNew++;
 			console.log(`${command.name} does not exist, creating...`);
-		} else if (!isCmdEqual(cmdData, guildCmd)) {
+		} else if (!updateCmd(cmdData, guildCmd as CompCommand)) {
 			awaitedCmds.push(commands.edit(guildCmd.id, cmdData));
 			numEdited++;
 			console.log(`A different version of ${command.name} already exists, editing...`);
@@ -100,21 +100,10 @@ async function loadCommands(bot: Client) {
 }
 
 async function runCommand(interaction: CommandInteraction, bot: Client): Promise<unknown> {
-	const command = bot.commands.get(interaction.commandName);
-	if (interaction.channel.type === 'DM' && command.runInDM === false) {
-		return interaction.reply('This command cannot be run in DMs');
-	}
-
-	if (interaction.channel.type === 'GUILD_TEXT' && command.runInGuild === false) {
-		return interaction.reply({
-			content: 'This command must be run in DMs, not public channels',
-			ephemeral: true
-		});
-	}
-
-	if (bot.commands.get(interaction.commandName).run !== undefined) {
+	const cmd = bot.commands.get(interaction.commandName);
+	if (cmd.run !== undefined) {
 		try {
-			bot.commands.get(interaction.commandName).run(interaction)
+			cmd.run(interaction)
 				?.catch(async (error: Error) => {
 					interaction.reply({ content: 'Sorry, an error has occurred. I have notified a moderator.', ephemeral: true });
 					bot.emit('error', new CommandError(error, interaction));
