@@ -35,10 +35,16 @@ async function main() {
 	bot.login(BOT.TOKEN);
 
 	bot.once('ready', async () => {
-		console.log(`${BOT.NAME} online`);
-		console.log(`${bot.ws.ping}ms WS ping`);
-		console.log(`Logged into ${bot.guilds.cache.size} guilds`);
-		console.log(`Serving ${bot.users.cache.size} users`);
+		const guilds = bot.guilds.cache.size;
+		const users = bot.users.cache.size;
+		
+		console.log(`\n
+		-----------------------------------
+		\t${ BOT.NAME } online\n
+		\t${ bot.ws.ping }ms ping\n
+		\tLogged into ${ guilds } guild${ guilds === 1 ? '' : 's'}\n
+		\tServing ${ users } user${ users === 1 ? '' : 's' }
+		-----------------------------------`);
 		
 		const activity = `${PREFIX}help`;
 		const type = 'PLAYING';

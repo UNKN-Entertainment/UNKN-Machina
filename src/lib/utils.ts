@@ -24,10 +24,10 @@ export function updateCmdOptionsList(oldCmdList: ApplicationCommandOptionData[],
 	return validCmdList;
 }
 
-export function isPermEqual(perm1: ApplicationCommandPermissionData, perm2: ApplicationCommandPermissionData): boolean {
-	return perm1.id === perm2.id
-		&& perm1.permission === perm2.permission
-		&& perm1.type === perm2.type;
+export function isPermEqual(oldPerm: ApplicationCommandPermissionData, newPerm: ApplicationCommandPermissionData): boolean {
+	return oldPerm.id === newPerm.id
+		&& oldPerm.permission === newPerm.permission
+		&& oldPerm.type === newPerm.type;
 }
 
 export function generateErrorEmbed(msg: string): MessageEmbed {
