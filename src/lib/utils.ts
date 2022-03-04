@@ -1,26 +1,30 @@
 //	https://github.com/ud-cis-discord/SageV2/blob/222918977bb3d73476492bdbf16b8edacbb6d2c8/src/lib/utils.ts
 
-import { ApplicationCommandOptionData, ApplicationCommandPermissionData, MessageEmbed } from 'discord.js';
-import { CompCommand } from '@lib/types/Cmd';
+import { ApplicationCommandOptionData, ApplicationCommandPermissionData, Client, MessageEmbed } from 'discord.js';
+import { Command, CompCommand } from '@root/src/lib/types/Command';
 import * as fs from 'fs';
 
-export function isCmdEqual(cmd1: CompCommand, cmd2: CompCommand): boolean {
-	return cmd1.name === cmd2.name
-		&& cmd1.description === cmd2.description
-		&& isOptionsListEqual(cmd1.options, cmd2.options);
+export function getCmd(bot: Client, cmd: string): Command {
+	cmd = cmd.toLowerCase();
+	return bot.commands.get(cmd);
 }
 
-export function isOptionsListEqual(list1: ApplicationCommandOptionData[], list2: ApplicationCommandOptionData[]): boolean {
-	const valid = list1.every(list1Option => list2.find(list2Option =>
-		list2Option.name === list1Option.name
-			&& list2Option.description === list1Option.description
-			&& list2Option.required === list1Option.required
-			&& list2Option.type === list1Option.type
+export function updateCmd(oldCmd: CompCommand, newCmd: CompCommand): boolean {
+	return oldCmd.name === newCmd.name
+		&& oldCmd.description === newCmd.description
+		&& updateCmdOptionsList(oldCmd.options, newCmd.options);
+}
+
+export function updateCmdOptionsList(oldCmdList: ApplicationCommandOptionData[], newCmdList: ApplicationCommandOptionData[]): boolean {
+	const validCmdList = oldCmdList.every(oldCmdOption => newCmdList.find(newCmdOption =>
+		newCmdOption.name === oldCmdOption.name
+		&& newCmdOption.description === oldCmdOption.description
+		&& newCmdOption.type === oldCmdOption.type
 	));
-	return valid;
+	return validCmdList;
 }
 
-export function isPermissionEqual(perm1: ApplicationCommandPermissionData, perm2: ApplicationCommandPermissionData): boolean {
+export function isPermEqual(perm1: ApplicationCommandPermissionData, perm2: ApplicationCommandPermissionData): boolean {
 	return perm1.id === perm2.id
 		&& perm1.permission === perm2.permission
 		&& perm1.type === perm2.type;
