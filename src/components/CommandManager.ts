@@ -8,43 +8,45 @@ import { CommandError } from '../lib/types/Errors';
 
 async function register(bot: Client): Promise<void> {
 	try {
-		await loadCommands(bot);
+		await loadCmds(bot);
 	} catch (error) {
 		bot.emit('error', error);
+		
 	}
 
 	bot.on('interactionCreate', async interaction => {
-		if (interaction.isCommand()) runCommand(interaction, bot);
+		if (interaction.isCommand()) runCmd(interaction, bot);
 	});
 }
 
-async function loadCommands(bot: Client) {
+async function loadCmds(bot: Client) {
 	bot.commands = new Collection();
 	await bot.guilds.cache.get(GUILD).commands.fetch();
 	const { commands } = bot.guilds.cache.get(GUILD);
 	let numNew = 0, numEdited = 0;
 
-	const commandFiles = readdirRecursive(`${__dirname}/../commands`).filter(file => file.endsWith('.js'));
+	const cmdFiles = readdirRecursive(`${__dirname}/../cmds`).filter(file => file.endsWith('.js'));
 
 	const awaitedCmds: Promise<ApplicationCommand>[] = [];
 
-	for (const file of commandFiles) {
-		const commandModule = await import(file);
+	console.log('\n\n\t\t-----   ( LOADING COMMANDS )  -----\n');
+	
+	for (const file of cmdFiles) {
+		const cmdModule = await import(file);
 
 		const dirs = file.split('/');
 		const name = dirs[dirs.length - 1].split('.')[0];
 
-		// semi type-guard, typeof returns function for classes
-		if (!(typeof commandModule.default === 'function')) {
-			console.log(`Invalid command ${name}`);
+		if (!(typeof cmdModule.default === 'function')) {
+			console.log(`Invalid command ${ name }`);
 			continue;
 		}
 
-		const command: Command = new commandModule.default;
+		const command: Command = new cmdModule.default;
 		command.name = name;
 
 		if (!command.description || command.description.length >= 100 || command.description.length <= 0) {
-			throw `Command ${command.name}'s description must be between 1 and 100 characters.`;
+			throw `Command ${ command.name }'s description must be between 1 and 100 characters.`;
 		}
 
 		command.category = dirs[dirs.length - 2];
@@ -61,11 +63,11 @@ async function loadCommands(bot: Client) {
 		if (!guildCmd) {
 			awaitedCmds.push(commands.create(cmdData));
 			numNew++;
-			console.log(`${command.name} does not exist, creating...`);
+			console.log(`${ command.name } doesn't exist, creating...`);
 		} else if (!updateCmd(cmdData, guildCmd as CompCommand)) {
 			awaitedCmds.push(commands.edit(guildCmd.id, cmdData));
 			numEdited++;
-			console.log(`A different version of ${command.name} already exists, editing...`);
+			console.log(`${ command.name } has changed, updating...`);
 		}
 		bot.commands.set(name, command);
 	}
@@ -87,7 +89,7 @@ async function loadCommands(bot: Client) {
 			&& (botCmd.permissions.length !== curPerms.length
 				|| !botCmd.permissions.every(perm =>
 					curPerms.find(curPerm => isPermEqual(curPerm, perm))))) {
-			console.log(`Updating permissions for ${botCmd.name}`);
+			console.log(`Updating permissions for ${ botCmd.name }`);
 			permsUpdated++;
 			return commands.permissions.set({
 				command: command.id,
@@ -96,10 +98,10 @@ async function loadCommands(bot: Client) {
 		}
 	}));
 
-	console.log(`${bot.commands.size} commands loaded (${numNew} new, ${numEdited} edited) and ${permsUpdated} permission${permsUpdated === 1 ? '' : 's'} updated.`);
+	console.log(`${ bot.commands.size } commands loaded (${ numNew } created, ${ numEdited } edited), ${ permsUpdated } permission${ permsUpdated === 1 ? '' : 's' } updated.`);
 }
 
-async function runCommand(interaction: CommandInteraction, bot: Client): Promise<unknown> {
+async function runCmd(interaction: CommandInteraction, bot: Client): Promise<unknown> {
 	const cmd = bot.commands.get(interaction.commandName);
 	if (cmd.run !== undefined) {
 		try {

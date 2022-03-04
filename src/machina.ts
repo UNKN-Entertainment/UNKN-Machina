@@ -3,6 +3,7 @@ import { Client, Intents, PartialTypes } from 'discord.js';
 import { version } from '@root/package.json';
 import { BOT, PREFIX } from '@root/config';
 import consoleStamp from 'console-stamp';
+import register from './components/CommandManager';
 
 const BOT_INTENTS = [
 	Intents.FLAGS.DIRECT_MESSAGES,
@@ -37,19 +38,21 @@ async function main() {
 	bot.once('ready', async () => {
 		const guilds = bot.guilds.cache.size;
 		const users = bot.users.cache.size;
-		
+
 		console.log(`\n
 		-----------------------------------
 		\t${ BOT.NAME } online\n
 		\t${ bot.ws.ping }ms ping\n
 		\tLogged into ${ guilds } guild${ guilds === 1 ? '' : 's'}\n
 		\tServing ${ users } user${ users === 1 ? '' : 's' }
-		-----------------------------------`);
+		-----------------------------------\n`);
 		
 		const activity = `${PREFIX}help`;
 		const type = 'PLAYING';
 		bot.user.setActivity(`${activity} (v${version})`, { type });
 		setTimeout(() => bot.user.setActivity(activity, { type }), 30e3);
+		
+		register(bot);
 	});
 }
 

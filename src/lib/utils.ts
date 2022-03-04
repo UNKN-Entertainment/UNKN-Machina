@@ -1,6 +1,6 @@
 //	https://github.com/ud-cis-discord/SageV2/blob/222918977bb3d73476492bdbf16b8edacbb6d2c8/src/lib/utils.ts
 
-import { ApplicationCommandOptionData, ApplicationCommandPermissionData, Client, MessageEmbed } from 'discord.js';
+import { ApplicationCommandPermissionData, Client, MessageEmbed } from 'discord.js';
 import { Command, CompCommand } from '@root/src/lib/types/Command';
 import * as fs from 'fs';
 
@@ -11,10 +11,10 @@ export function getCmd(bot: Client, cmd: string): Command {
 
 export function updateCmd(oldCmd: CompCommand, newCmd: CompCommand): boolean {
 	return oldCmd.name === newCmd.name
-		&& oldCmd.description === newCmd.description
-		&& updateCmdOptionsList(oldCmd.options, newCmd.options);
+		&& oldCmd.description === newCmd.description;
 }
 
+/*
 export function updateCmdOptionsList(oldCmdList: ApplicationCommandOptionData[], newCmdList: ApplicationCommandOptionData[]): boolean {
 	const validCmdList = oldCmdList.every(oldCmdOption => newCmdList.find(newCmdOption =>
 		newCmdOption.name === oldCmdOption.name
@@ -23,6 +23,7 @@ export function updateCmdOptionsList(oldCmdList: ApplicationCommandOptionData[],
 	));
 	return validCmdList;
 }
+*/
 
 export function isPermEqual(oldPerm: ApplicationCommandPermissionData, newPerm: ApplicationCommandPermissionData): boolean {
 	return oldPerm.id === newPerm.id
