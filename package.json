@@ -8,25 +8,37 @@
 	"description": "A custom Discord mod-bot created to manage the UNKN Entertainment Discord server.",
 	"main": "dist/src/machina.js",
 	"scripts": {
-		"start": "node dist/src/machina.js",
 		"build": "tsc -p .",
 		"clean": "rm -rf dist",
-		"test": "eslint src --ext .ts",
 		"lint": "eslint src --ext .ts --fix",
-		"dev": "tsc-watch --onSuccess \"node dist/src/machina.js\""
+		"dev": "tsc-watch --onSuccess \"node dist/src/machina.js\"", 
+		"all": "npm run lint && npm run clean && npm run build && npm run dev"
 	},
 	"repository": {
 		"type": "git",
 		"url": "git+https://github.com/UNKN-Entertainment/UNKN-Machina.git"
 	},
-	"author": "Ren Ross (cryptid)",
+	"author": "Ren Ross",
 	"license": "",
 	"bugs": {
 		"url": "https://github.com/UNKN-Entertainment/UNKN-Machina/issues"
 	},
 	"homepage": "https://github.com/UNKN-Entertainment/UNKN-Machina",
 	"dependencies": {
-    	"discord.js": "^13.6.0",
-    	"octokit": "^1.7.1"
-  }
+		"console-stamp": "^3.0.4",
+		"discord.js": "^13.6.0",
+		"module-alias": "^2.2.2",
+		"pretty-ms": "^7.0.1",
+		"tsc-watch": "^4.6.0"
+	},
+	"_moduleAliases": {
+		"@root": "dist",
+		"@lib": "dist/src/lib",
+		"@components": "dist/src/components"
+	},
+	"devDependencies": {
+		"@typescript-eslint/eslint-plugin": "^5.13.0",
+		"@typescript-eslint/parser": "^5.13.0",
+		"eslint": "^8.10.0"
+	}
 }
