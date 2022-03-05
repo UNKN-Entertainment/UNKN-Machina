@@ -1,14 +1,14 @@
 import { ApplicationCommandPermissionData } from 'discord.js';
 import { ROLES } from '@root/config';
 
-export const STAFF_PERMS: ApplicationCommandPermissionData = {
-	id: ROLES.STAFF,
+export const MINI_OP_PERMS: ApplicationCommandPermissionData = {
+	id: ROLES.MINI_OP,
 	permission: true,
 	type: 'ROLE'
 };
 
-export const OPPS_PERMS: ApplicationCommandPermissionData = {
-	id: ROLES.OPPS,
+export const OP_PERMS: ApplicationCommandPermissionData = {
+	id: ROLES.OP,
 	permission: true,
 	type: 'ROLE'
 };
