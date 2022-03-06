@@ -1,4 +1,3 @@
-import { ROLES } from '@root/config';
 import { ApplicationCommandOptionData, ApplicationCommandPermissionData, CommandInteraction } from 'discord.js';
 
 export abstract class Command {
@@ -8,11 +7,7 @@ export abstract class Command {
 	usage?: string;
 	extendedHelp?: string;
 	options?: ApplicationCommandOptionData[];
-	permissions?: ApplicationCommandPermissionData[] = [{
-		id: ROLES.MEMBER,
-		type: 'ROLE',
-		permission: true
-	}];
+	permissions?: ApplicationCommandPermissionData[] = [];
 
 	abstract run(interaction: CommandInteraction): Promise<unknown>;
 }
