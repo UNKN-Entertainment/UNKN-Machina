@@ -5,8 +5,9 @@ import moment from 'moment';
 
 export default class extends Command {
 
+	permissions: ApplicationCommandPermissionData[] = [OP_PERMS];
 	description = 'Gives information about a role, including a list of the members who have it.';
-	runInDM = false;
+	
 	options: ApplicationCommandOptionData[] = [
 		{
 			name: 'role',
@@ -15,7 +16,6 @@ export default class extends Command {
 			required: true
 		}
 	];
-	permissions: ApplicationCommandPermissionData[] = [OP_PERMS];
 
 	async run(interaction: CommandInteraction): Promise<void> {
 		const role = interaction.options.getRole('role') as Role;
