@@ -11,7 +11,7 @@
 		"build": "tsc -p .",
 		"clean": "rm -rf dist",
 		"lint": "eslint src --ext .ts --fix",
-		"dev": "tsc-watch --onSuccess \"node dist/src/machina.js\"", 
+		"dev": "tsc-watch --onSuccess \"node dist/src/machina.js\"",
 		"all": "npm run lint && npm run clean && npm run build && npm run dev"
 	},
 	"repository": {
@@ -28,6 +28,7 @@
 		"console-stamp": "^3.0.4",
 		"discord.js": "^13.6.0",
 		"module-alias": "^2.2.2",
+		"moment": "^2.29.1",
 		"pretty-ms": "^7.0.1",
 		"tsc-watch": "^4.6.0"
 	},
